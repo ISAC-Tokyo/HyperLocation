@@ -1,5 +1,5 @@
 #! /usr/bin/env ruby
-#
+# author: takano32 <takano32 at gmail.com>
 #
 
 require 'socket'
