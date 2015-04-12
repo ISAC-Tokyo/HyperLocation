@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hyper Location Web Client</title>
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.lite.js"></script>
+    <script src="./main.js"></script>
+    <style>
+      body {
+        font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
+        font-weight: normal;
+      }
+      h1 {
+        font-size:30px;
+        font-weight:normal;
+      }
+
+      h2 {
+        font-size:24px;
+        font-weight:normal;
+      }
+
+      .logo {
+      }
+      .logo img {
+        width :100px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Hyper Location Web Client</h1>
+    <div class="logo"><img src="./logo.png" /></div>
+
+    RTK Location Server Endpoint:
+    <input type="text" value="http://192.168.158.202/location" id="location_server" style="width:200px">
+    <input type="button" value="change" id="change_btn">
+
+    <h2>Response</h2>
+    <div id="result">Result not received</div>
+
+  </body>
+</html>
+
