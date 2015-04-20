@@ -23,5 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, :inline => "sudo apt-get install screen"
   config.vm.provision :shell, :inline => "sudo apt-get install tmux"
   config.vm.provision :shell, :inline => "sudo apt-get install zsh"
+  config.vm.provision :shell, :inline => "mkdir ~/dev"
+  config.vm.provision :shell, :inline => "git clone git@github.com:ISAC-Tokyo/HyperLocation.git ~/"
 
 end
