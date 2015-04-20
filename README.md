@@ -17,9 +17,9 @@ More description you can see [./project.md](./project.md)
 ```
 ## Required Devices
 
-- GNSS Device
+- GPS/GNSS Device
   - [Ublox-m8](http://www.u-blox.com/en/u-blox-6-the-next-generation-gps-platform.html)
-- For caluculate RTK positioning
+- Caluculate RTK positioning
   - [Raspberry Pi](https://www.raspberrypi.org/)
 
 ## Development Setup
@@ -38,4 +38,5 @@ $ vagrant ssh
 $ git clone git@github.com:ISAC-Tokyo/HyperLocation.git
 $ cd HyperLocation
 $ make setup
+$ make retkrcv
 ```
