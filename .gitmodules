@@ -1,0 +1,3 @@
+[submodule "RTKLIB"]
+	path = RTKLIB
+	url = git@github.com:tomojitakasu/RTKLIB.git
