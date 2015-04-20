@@ -1,6 +1,6 @@
 # HyperLocation
 
-RTK-GNSS for Smartphone.
+Low cost RTK-GNSS for Smartphone.
 
 ## Overview
 
