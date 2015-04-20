@@ -17,5 +17,5 @@ RTK-GNSS for Smartphone.
 
 - GNSS Device
   - [Ublox-m8](http://www.u-blox.com/en/u-blox-6-the-next-generation-gps-platform.html)
-- Computer
+- For caluculate RTK positioning
   - [Raspberry Pi](https://www.raspberrypi.org/)
