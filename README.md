@@ -45,5 +45,5 @@ $ vagrant ssh
 $ git clone git@github.com:ISAC-Tokyo/HyperLocation.git
 $ cd HyperLocation
 $ make setup
-$ make retkrcv
+$ make rtklib
 ```
