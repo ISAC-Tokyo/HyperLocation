@@ -15,15 +15,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :shell, :inline => "sudo apt-get update"
-  config.vm.provision :shell, :inline => "sudo apt-get install language-pack-ja"
+  config.vm.provision :shell, :inline => "sudo apt-get install -y language-pack-ja"
   config.vm.provision :shell, :inline => "sudo dpkg-reconfigure locales"
   config.vm.provision :shell, :inline => "sudo update-locale LANG=ja_JP.UTF-8"
-  config.vm.provision :shell, :inline => "sudo apt-get install git"
-  config.vm.provision :shell, :inline => "sudo apt-get install vim"
-  config.vm.provision :shell, :inline => "sudo apt-get install screen"
-  config.vm.provision :shell, :inline => "sudo apt-get install tmux"
-  config.vm.provision :shell, :inline => "sudo apt-get install zsh"
-  config.vm.provision :shell, :inline => "mkdir ~/dev"
-  config.vm.provision :shell, :inline => "git clone git@github.com:ISAC-Tokyo/HyperLocation.git ~/"
+  config.vm.provision :shell, :inline => "sudo apt-get install -y git vim screen tmux zsh"
+  #config.vm.provision :shell, :inline => "mkdir /home/vagrant/dev"
+  #config.vm.provision :shell, :inline => "git clone git@github.com:ISAC-Tokyo/HyperLocation.git /home/vagrant/dev/"
 
 end
