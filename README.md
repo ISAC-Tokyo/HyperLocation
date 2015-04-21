@@ -16,11 +16,11 @@ More description you can see [./project.md](./project.md)
           |                                                  |                                     
           |                                                  |                                     
           |                                                  |                                     
-+---------+---------+                               +--------+---------+                           
-| Web Server        |                               |  Base Station    |                           
-| HTML, JavaScript  |                               |                  |                           
-+-------------------+                               +------------------+                           
-Serve User Interface
+ +--------+---------+                               +--------+---------+                           
+ | Web Server       |                               |  Base Station    |                           
+ | HTML, JavaScript |                               |                  |                           
+ +------------------+                               +------------------+                           
+ Serve User Interface
 ```
 ## Required Devices
 
