@@ -9,9 +9,9 @@ More description you can see [./project.md](./project.md)
 ```
  +------------------+          +--------------------------------------+                            
  | Smartphone       |          | RaspberryPi                          |                            
- | +--------------+ |   HTTP   |  +------------+  TCP  +-----------+  |         +-----------------+
- | |   Browser    <---------------+ API Server <-------+  RTKLIB   <------------+ GNSS/GPS Device |
- | +------^-------+ |          |  +------------+       +-----^-----+  |         +-----------------+
+ | +--------------+ | Location |  +------------+       +-----------+  |           +-----------------+
+ | |   Browser    <----(HTTP)-----+ API Server <-(TCP)-+  RTKLIB   <----(Serial)--+ GNSS/GPS Device |
+ | +------^-------+ |          |  +------------+       +-----^-----+  |           +-----------------+
  +--------|---------+          +-----------------------------|--------+                            
           |                                                  |                                     
           |                                                  |                                     
@@ -20,6 +20,7 @@ More description you can see [./project.md](./project.md)
 | Web Server        |                               |  Base Station    |                           
 | HTML, JavaScript  |                               |                  |                           
 +-------------------+                               +------------------+                           
+Serve User Interface
 ```
 ## Required Devices
 
