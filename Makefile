@@ -10,3 +10,6 @@ rtklib: setup
 
 rtkrcv_single:
 	sudo ./RTKLIB/app/rtkrcv/gcc/rtkrcv -s -o ./config/rtkrcv_single.conf
+
+rtkrcv_rtk:
+	sudo ./RTKLIB/app/rtkrcv/gcc/rtkrcv -o ./config/rtkrcv_rtk.conf
