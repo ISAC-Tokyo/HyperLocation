@@ -5,6 +5,7 @@ columns = %w!
   GPST1 GPST2 latitude(deg) longitude(deg) height(m) Q ns
   sdn(m) sde(m) sdu(m) sdne(m) sdeu(m) sdun(m) age(s) ratio
 !
+
 mutex = Mutex.new
 data = ''
 Thread.start do |thread|
@@ -23,3 +24,15 @@ get '/' do
   end
 end
 
+require 'json'
+get '/v1/json' do
+  mutex.synchronize do
+    kvs = columns.zip(data.split(/[^-0-9\.]/).reject{ |v| v.empty? })
+    json = kvs.inject({}) do |r, p|
+      k, v = p
+      r[k] = v
+      r
+    end.to_json
+    return json
+  end
+end
