@@ -33,6 +33,8 @@ get '/v1/json' do
       r[k] = v
       r
     end.to_json
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    content_type :json
     return json
   end
 end
