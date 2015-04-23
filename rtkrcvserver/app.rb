@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'socket'
 
+set :protection, :except => [:frame_options, :json_csrf]
+
 columns = %w!
   GPST1 GPST2 latitude(deg) longitude(deg) height(m) Q ns
   sdn(m) sde(m) sdu(m) sdne(m) sdeu(m) sdun(m) age(s) ratio
