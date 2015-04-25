@@ -5,6 +5,9 @@ $(function() {
     });
 
     request();
+    setInterval(function() {
+        request();
+    }, 1000);
 
 });
 
@@ -15,8 +18,9 @@ function request() {
         type: 'GET',
         url: api,
         timeout: '5000'
-    }).done(function() {
-        console.log('done');
+    }).done(function(ret) {
+        console.log(ret);
+        $('#result').text(JSON.stringify(ret));
     }).error(function(e) {
         console.log('error');
         console.error(e);
