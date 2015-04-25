@@ -58,6 +58,23 @@
         word-break:break-all;
       }
 
+      canvas {
+        width: 300px;
+        height: 300px;
+      }
+
+      table.data td {
+        min-width: 150px;
+      }
+      table.data td.num {
+        text-align:right;
+        font-family: monospace;
+      }
+
+      table.data tr:nth-child(even) {
+        background-color: #F0F0FF;
+      }
+
     </style>
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -81,10 +98,33 @@
       http://hl.no32.tk/v1/json is our Demo Server
       </p>
       <h2>Status</h2>
-      <div>Connection: <span id="status"></span></div>
-      <div>Latitude(deg): <span id="lat"></span></div>
-      <div>Longitude(deg): <span id="lon"></span></div>
-      <div>Height(m): <span id="height"></span></div>
+      <table class="pure-table pure-table-bordered data">
+        <tr>
+          <td>Connection</td><td id="status"></td>
+        </tr>
+        <tr>
+          <td>Latitude(deg)</td><td id="lat" class="num"></td>
+        </tr>
+        <tr>
+          <td>Longitude(deg)</td><td id="lon" class="num"></td>
+        </tr>
+        <tr>
+          <td>Height(m)</td><td id="height" class="num"></td>
+        </tr>
+      </table>
+
+      <h2>Statistics</h2>
+      <table class="pure-table pure-table-bordered data">
+        <tr>
+          <td>Variance Lat</td><td id="varlat" class="num"></td>
+        </tr>
+        <tr>
+          <td>Variance Lon</td><td id="varlon" class="num"></td>
+        </tr>
+        <tr>
+          <td>Drift(m)</td><td id="drift" class="num"></td>
+        </tr>
+      </table>
 
       <h2>Response</h2>
       <div id="result">Result not received</div>
@@ -103,7 +143,7 @@
 
   </body>
   <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.all.js"></script>
   <script src="./main.js"></script>
 </html>
 
