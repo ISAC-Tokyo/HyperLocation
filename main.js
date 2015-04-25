@@ -1,39 +1,50 @@
 $(function() {
+    'use strict';
 
-    $('#change_btn').on(function() {
-        request();
+    var api = $('#location_server').val();
+    var buttonStream = Rx.Observable.fromEvent($('#change_btn'), 'click').map(function(e) {
+        api = $('#location_server').val();
+        return true;
+    });
+    var timerStream = Rx.Observable.interval(1000);
+
+
+    var responseStream = Rx.Observable.merge(buttonStream, timerStream)
+    .map(function() { return api })
+    .filter(function(url) { return url.length > 0 })
+    .throttle(500)
+    .flatMap(function(url) {
+        var promise = $.ajax(api);
+        return Rx.Observable.fromPromise(promise);
     });
 
-    request();
-    setInterval(function() {
-        request();
-    }, 1000);
 
-});
+    var locationStream = new Rx.Subject();
+    responseStream.subscribe(function(ret) {
+        locationStream.onNext({
+            lat: ret["latitude(deg)"],
+            lon: ret["longitude(deg)"],
+            height: ret["height(m)"]
+        });
+        updateStatus(null, 'Data received', JSON.stringify(ret));
+    }, function(e) {
+        updateStatus(true, e.statusText, '');
+    });
 
-function request() {
-    var api = $('#location_server').val()
-    if (!api)  {
-        $('#result').text('No URL given');
-        return;
-    }
+    locationStream.subscribe(function(data) {
+        $('#lat').text(data.lat);
+        $('#lon').text(data.lon);
+        $('#height').text(data.height);
+    });
 
-    $.ajax({
-        type: 'GET',
-        url: api,
-        timeout: '5000'
-    }).done(function(ret) {
-        console.log(ret);
-        $('#result').text(JSON.stringify(ret));
-    }).error(function(e) {
-        console.log('error');
-        console.error(e);
-        if (e.statusText) {
-          $('#result').text(e.statusText);
+
+    function updateStatus(error, status, data) {
+        if (error) {
+            $('#status').removeClass('ok').addClass('error');
         } else {
-          $('#result').text('Error');
+            $('#status').removeClass('error').addClass('ok');
         }
-    }).always(function(e) {
-        console.log('always');
-    });
-}
+        $('#status').text(status);
+        $('#result').text(data);
+    }
+});

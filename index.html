@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Hyper Location Web Client</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
       body {
@@ -27,6 +28,13 @@
         margin: 15px 0 5px 0;
         color: #444;
         letter-spacing: -0.02em;
+      }
+
+      #status.error {
+        color: #F55;
+      }
+      #status.ok {
+        color: #5F5;
       }
 
       .main {
@@ -67,16 +75,21 @@
       <h2>Endpoint</h2>
       <form class="pure-form">
          <input type="text" value="http://hl.no32.tk/v1/json" placeholder="Hyper Location Endpoint" id="location_server" class="pure-input-1" placeholder="Username">
-         <button type="submit" class="pure-button pure-input-1 pure-button-primary">Change</button>
+         <button id="change_btn" type="button" class="pure-button pure-input-1 pure-button-primary">Change</button>
       </form>
       <p>
       http://hl.no32.tk/v1/json is our Demo Server
       </p>
+      <h2>Status</h2>
+      <div>Connection: <span id="status"></span></div>
+      <div>Latitude(deg): <span id="lat"></span></div>
+      <div>Longitude(deg): <span id="lon"></span></div>
+      <div>Height(m): <span id="height"></span></div>
 
       <h2>Response</h2>
       <div id="result">Result not received</div>
 
-      <div class="footer">
+      <div class="footer" style="position:relative; width:100%;">
         <h2>
         Hyper Location Project
         </h3>
