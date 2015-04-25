@@ -13,6 +13,10 @@ $(function() {
 
 function request() {
     var api = $('#location_server').val()
+    if (!api)  {
+        $('#result').text('No URL given');
+        return;
+    }
 
     $.ajax({
         type: 'GET',
