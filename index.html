@@ -14,9 +14,10 @@
       h1 {
         font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
         font-weight: normal;
-       font-size: 200%;
+        font-size: 200%;
         font-weight: 100;
         margin: 0;
+        color: #444;
       }
 
       h2 {
@@ -24,11 +25,12 @@
         font-weight: 100;
         line-height: 1.5;
         margin: 15px 0 5px 0;
-        color: #666;
+        color: #444;
         letter-spacing: -0.02em;
       }
 
       .main {
+          margin-top: 2px;
           margin-left: auto;
           margin-right: auto;
           padding-left: 1em;
@@ -67,7 +69,9 @@
          <input type="text" value="http://hl.no32.tk/v1/json" placeholder="Hyper Location Endpoint" id="location_server" class="pure-input-1" placeholder="Username">
          <button type="submit" class="pure-button pure-input-1 pure-button-primary">Change</button>
       </form>
+      <p>
       http://hl.no32.tk/v1/json is our Demo Server
+      </p>
 
       <h2>Response</h2>
       <div id="result">Result not received</div>
