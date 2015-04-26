@@ -139,22 +139,24 @@ LocationMap.prototype.updateMarker = function(pos) {
 }
 
 LocationMap.prototype.updatePath = function(pos) {
-    if (this.paths.length > 20) {
+    if (this.paths.length > 200) {
         this.paths.shift();
     }
     this.paths.push(pos);
 
-    if (!this.driftPath) {
-        this.driftPath = new google.maps.Polyline({
-            path: this.paths,
-            strokeColor: "#3333FF",
-            clickable: false,
-            geodesic: true,
-            map: this.map,
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        });
+    if (this.driftPath) {
+        this.driftPath.setMap(null);
+        this.driftPath = null;
     }
-    this.driftPath.setPath(this.paths);
+
+    this.driftPath = new google.maps.Polyline({
+        path: this.paths,
+        strokeColor: "#3333FF",
+        clickable: false,
+        geodesic: true,
+        map: this.map,
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
 }
 
