@@ -65,6 +65,7 @@
 
       table.data td {
         min-width: 150px;
+        padding: 5px;
       }
       table.data td.num {
         text-align:right;
@@ -73,6 +74,11 @@
 
       table.data tr:nth-child(even) {
         background-color: #F0F0FF;
+      }
+      #map_canvas {
+        margin: 20px 0 20px 0;
+        width: 320px;
+        height: 320px;
       }
 
     </style>
@@ -112,6 +118,9 @@
           <td>Height(m)</td><td id="height" class="num"></td>
         </tr>
       </table>
+      <div id="map_canvas"></div>
+
+
 
       <h2>Statistics</h2>
       <table class="pure-table pure-table-bordered data">
@@ -142,6 +151,7 @@
     </div>
 
   </body>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDxynbvhnTHYl8nIIAoct1AjbJCxWZSwPw&sensor=false"></script>
   <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/2.3.22/rx.all.js"></script>
   <script src="./main.js"></script>

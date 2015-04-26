@@ -22,11 +22,15 @@ $(function() {
 
     var locationStream = new Rx.Subject();
       responseStream.subscribe(function(ret) {
+        var lat = parseFloat(ret["latitude(deg)"]);
+        var lon = parseFloat(ret["longitude(deg)"]);
+        var height = parseFloat(ret["height(m)"]);
         locationStream.onNext({
-            lat: parseFloat(ret["latitude(deg)"]),
-            lon: parseFloat(ret["longitude(deg)"]),
-            height: parseFloat(ret["height(m)"])
+            lat: lat,
+            lon: lon,
+            height: height
         });
+        map.setCenter(lat, lon);
         updateStatus(null, 'Data received', ret);
     }, function(e) {
         updateStatus(true, e.statusText, '');
@@ -88,6 +92,8 @@ $(function() {
         $('#status').text(status);
         $('#result').text(JSON.stringify(data));
     }
+
+    var map = new LocationMap();
 });
 
 function roundFloat(val, dig) {
@@ -96,4 +102,33 @@ function roundFloat(val, dig) {
 
 Array.prototype.sum = function(){
     return this.reduce(function(a, b) {return a + b});
+}
+
+
+function LocationMap() {
+    this.elementId = 'map_canvas';
+    var mapOptions = {
+        zoom: 19,
+        center: new google.maps.LatLng(-34.397, 150.644),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    this.map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+    this.markers = [];
+}
+
+LocationMap.prototype.setCenter = function(lat, lng) {
+    var centerPos = new google.maps.LatLng(lat, lng);
+    var marker = new google.maps.Marker({
+        position: centerPos,
+        map: this.map,
+        draggable:false,
+        title: "Positioned"
+    });
+    this.map.setCenter(centerPos);
+    this.markers.push(marker);
+
+    if (this.markers.length > 10) {
+        var old = this.markers.shift();
+        old.setMap(null);
+    }
 }
