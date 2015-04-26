@@ -90,6 +90,7 @@ $(function() {
             $('#height').text(data["height(m)"]);
         }
         $('#status').text(status);
+        $('#time').text(new Date().toLocaleTimeString());
         $('#result').text(JSON.stringify(data));
     }
 
