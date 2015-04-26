@@ -139,7 +139,7 @@ LocationMap.prototype.updateMarker = function(pos) {
 }
 
 LocationMap.prototype.updatePath = function(pos) {
-    if (this.paths.length > 10) {
+    if (this.paths.length > 20) {
         this.paths.shift();
     }
     this.paths.push(pos);
