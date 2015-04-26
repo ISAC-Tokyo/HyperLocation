@@ -20,7 +20,6 @@ $(function() {
         return Rx.Observable.fromPromise(promise);
     });
 
-
     var locationStream = new Rx.Subject();
       responseStream.subscribe(function(ret) {
         locationStream.onNext({
@@ -32,7 +31,6 @@ $(function() {
     }, function(e) {
         updateStatus(true, e.statusText, '');
     });
-
 
     locationStream
     .bufferWithCount(4, 1)
@@ -77,7 +75,6 @@ $(function() {
         var drift = Math.sqrt(x*x + y*y)
         $('#drift').text(roundFloat(drift, 4));
     });
-
 
     function updateStatus(error, status, data) {
         if (error) {
