@@ -29,7 +29,7 @@ end
 require 'json'
 get '/v1/json' do
   mutex.synchronize do
-    kvs = columns.zip(data.split(/[^-0-9\.]/).reject{ |v| v.empty? })
+    kvs = columns.zip(data.split(/[^-0-9\/:\.]/).reject{ |v| v.empty? })
     json = kvs.inject({}) do |r, p|
       k, v = p
       r[k] = v
