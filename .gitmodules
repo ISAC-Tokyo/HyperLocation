@@ -1,3 +1,6 @@
 [submodule "RTKLIB"]
 	path = RTKLIB
 	url = git@github.com:tomojitakasu/RTKLIB.git
+[submodule "log"]
+	path = log
+	url = git@github.com:ISAC-Tokyo/HyperLocation-log.git
