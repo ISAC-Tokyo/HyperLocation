@@ -27,12 +27,11 @@ get '/' do
 end
 
 require 'json'
-require 'date'
 get '/v1/json' do
   mutex.synchronize do
     kvs = columns.zip(data.split(/[^-0-9\/:\.]/).reject{ |v| v.empty? })
 
-    now = DateTime.now
+    now = Time.now.utc
     date = now.strftime '%Y/%m/%d'
     time = now.strftime '%H:%M:%S.%L'
 
