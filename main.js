@@ -3,42 +3,62 @@
 $(function() {
     'use strict';
 
-    var api = $('#location_server').val();
-    var buttonStream = Rx.Observable.fromEvent($('#change_btn'), 'click').map(function(e) {
-        api = $('#location_server').val();
-        return true;
-    });
-    var timerStream = Rx.Observable.interval(1000);
+    var timer;
+    var locationStream = new Rx.Subject();
 
+    function dataLocation() {
+        return $('#location_server').val();
+    }
 
-    var responseStream = Rx.Observable.merge(buttonStream, timerStream)
-    .map(function() { return api })
+    var buttonStream = Rx.Observable.fromEvent($('#change_btn'), 'click').map(dataLocation);
+    var initialEvent = new Rx.Subject()
+    var initialStream = initialEvent.map(dataLocation);
+    var locationStream = new Rx.Subject();
+
+    var responseStream = Rx.Observable.merge(buttonStream, initialStream)
     .filter(function(url) { return url.length > 0 })
     .throttle(500)
     .flatMap(function(url) {
-        var promise = $.ajax(api);
+        var promise = $.ajax(url);
         return Rx.Observable.fromPromise(promise);
     });
 
-    var locationStream = new Rx.Subject();
-      responseStream.subscribe(function(ret) {
-        var lat = parseFloat(ret["latitude(deg)"]);
-        var lon = parseFloat(ret["longitude(deg)"]);
-        var height = parseFloat(ret["height(m)"]);
-        locationStream.onNext({
-            lat: lat,
-            lon: lon,
-            height: height
+    responseStream.subscribe(function(ret) {
+        clearInterval(timer);
+
+        var lines = ret.split('\n');
+        // Drop headers
+        lines.shift();
+        lines.shift();
+        var data = lines.map(function(line) {
+            var row = line.split(' ').filter(function(val){return val.length > 0});
+            var lat = parseFloat(row[2])
+            var lon = parseFloat(row[3])
+            var height = parseFloat(row[4])
+            return({
+                lat: lat,
+                lon: lon,
+                height: height
+            });
         });
-        map.update(lat, lon);
-        updateStatus(null, 'Data received', ret);
+
+        timer = setInterval(function() {
+            var d = data.shift();
+            console.log(d);
+            if (d) { locationStream.onNext(d); }
+        }, 1000);
     }, function(e) {
+        clearInterval(timer);
         updateStatus(true, e.statusText, '');
     });
 
-    locationStream
-    .bufferWithCount(4, 1)
-    .map(function(n) {
+    locationStream.subscribe(function(val) {
+        updateStatus(false, 'OK', val);
+        map.update(val.lat, val.lon)
+    });
+
+
+    locationStream.bufferWithCount(4, 1).map(function(n) {
         var count = n.length;
         var latMean = n.map(function(item){return item.lat}).sum()/count;
         var lonMean = n.map(function(item){return item.lon}).sum()/count;
@@ -85,9 +105,9 @@ $(function() {
             $('#status').removeClass('ok').addClass('error');
         } else {
             $('#status').removeClass('error').addClass('ok');
-            $('#lat').text(data["latitude(deg)"]);
-            $('#lon').text(data["longitude(deg)"]);
-            $('#height').text(data["height(m)"]);
+            $('#lat').text(data.lat);
+            $('#lon').text(data.lon);
+            $('#height').text(data.height);
         }
         $('#status').text(status);
         $('#time').text(new Date().toLocaleTimeString());
@@ -95,6 +115,7 @@ $(function() {
     }
 
     var map = new LocationMap();
+    initialEvent.onNext();
 });
 
 function roundFloat(val, dig) {
@@ -119,10 +140,9 @@ function LocationMap() {
     this.paths = [];
 }
 
-LocationMap.prototype.update = function(lat, lng) {
-    var pos = new google.maps.LatLng(lat, lng);
-    //this.updateMarker(pos);
-    this.updatePath(pos);
+LocationMap.prototype.update = function(lat, lon) {
+    var pos = new google.maps.LatLng(lat, lon);
+    this.updateMarker(pos);
     this.map.setCenter(pos);
 }
 
@@ -136,36 +156,5 @@ LocationMap.prototype.updateMarker = function(pos) {
         });
     }
     this.marker.setPosition(pos);
-}
-
-LocationMap.prototype.updatePath = function(pos) {
-
-    if (this.paths.length > 1) {
-        var latest = this.paths[this.paths.length - 1]
-        if (latest && latest.lng() == pos.lng() && latest.lat() == pos.lat()) {
-            return;
-        }
-    }
-
-
-    if (this.paths.length > 200) {
-        this.paths.shift();
-    }
-    this.paths.push(pos);
-
-    if (this.driftPath) {
-        this.driftPath.setMap(null);
-        this.driftPath = null;
-    }
-
-    this.driftPath = new google.maps.Polyline({
-        path: this.paths,
-        strokeColor: "#3333FF",
-        clickable: false,
-        geodesic: true,
-        map: this.map,
-        strokeOpacity: 1.0,
-        strokeWeight: 2
-    });
 }
 

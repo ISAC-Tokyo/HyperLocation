@@ -94,14 +94,17 @@
   </head>
   <body>
     <div class="main">
-      <h1>Hyper Location Web Client</h1>
+      <h1>Hyper Location Data Preview</h1>
       <h2>Endpoint</h2>
       <form class="pure-form">
-         <input type="text" value="http://hl.no32.tk/v1/json" placeholder="Hyper Location Endpoint" id="location_server" class="pure-input-1" placeholder="Username">
+         <input type="text" value="./rtk_fixed_dev.dat" placeholder="Hyper Location Endpoint" id="location_server" class="pure-input-1" placeholder="Username">
+         <!--
+         <input type="text" value="http://tokyo.spaceappschallenge.org/HyperLocation/rtk_fixed.dat" placeholder="Hyper Location Endpoint" id="location_server" class="pure-input-1" placeholder="Username">
+         -->
          <button id="change_btn" type="button" class="pure-button pure-input-1 pure-button-primary">Change</button>
       </form>
       <p>
-      http://hl.no32.tk/v1/json is our Demo Server
+      <a href="http://tokyo.spaceappschallenge.org/HyperLocation/rtk_fixed.dat">http://tokyo.spaceappschallenge.org/HyperLocation/rtk_fixed.dat</a> is fixed data of our location using RTK-GNSS
       </p>
       <h2>Status</h2>
       <table class="pure-table pure-table-bordered data">
