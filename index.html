@@ -103,14 +103,11 @@
       <h1>Hyper Location Data Preview</h1>
       <h2>Endpoint</h2>
       <form class="pure-form">
-         <input type="text" value="./rtk_fixed_dev.dat" placeholder="Hyper Location Endpoint" id="location_server" class="pure-input-1" placeholder="Username">
-         <!--
          <input type="text" value="http://tokyo.spaceappschallenge.org/HyperLocation/rtk_fixed.dat" placeholder="Hyper Location Endpoint" id="location_server" class="pure-input-1" placeholder="Username">
-         -->
          <button id="change_btn" type="button" class="pure-button pure-input-1 pure-button-primary">Change</button>
       </form>
       <p>
-      <a href="http://tokyo.spaceappschallenge.org/HyperLocation/rtk_fixed.dat">http://tokyo.spaceappschallenge.org/HyperLocation/rtk_fixed.dat</a> is fixed data of our location using RTK-GNSS
+      <a href="http://tokyo.spaceappschallenge.org/HyperLocation/rtk_fixed_all.dat">http://tokyo.spaceappschallenge.org/HyperLocation/rtk_fixed_all.dat</a> is fixed data of our location using RTK-GNSS for this demo.
       </p>
       <h2>Status</h2>
       <table class="pure-table pure-table-bordered data">
@@ -133,7 +130,11 @@
           <td>Drift(m)</td><td id="drift" class="num"></td>
         </tr>
       </table>
+
+      <h2>Details</h2>
       <canvas id="expanded_map"></canvas>
+
+      <h2>Location Overview</h2>
       <div id="map_canvas"></div>
 
 

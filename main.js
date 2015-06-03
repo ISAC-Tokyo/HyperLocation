@@ -46,7 +46,6 @@ $(function() {
 
         timer = setInterval(function() {
             var d = data.shift();
-            console.log(d);
             if (d) {
                 locationStream.onNext(d);
             } else {
@@ -152,10 +151,10 @@ function ExpandedMap() {
 ExpandedMap.prototype.initialize = function() {
     this.centerLat = 35.661359253
     this.centerLon = 139.678142785
-    this.mapWidth = 50; // mm
-    this.mapHeight = 50; // mm
+    this.mapWidth = 40; // mm
+    this.mapHeight = 40; // mm
     this.dataArray = []
-    this.dataSize = 100;
+    this.dataSize = 50;
 
     this.canvasWidth = 310; // px
     this.canvasHeight = 310; // px
@@ -214,7 +213,14 @@ ExpandedMap.prototype.drawSupports = function() {
     c.lineTo(20 + this.canvasWidth/4, this.canvasHeight - 25);
     c.stroke();
 
-    c.fillText(this.mapWidth/4 + 'mm', 20, this.canvasHeight - 10);
+    c.moveTo(20, this.canvasHeight - 30);
+    c.lineTo(20, this.canvasHeight - 20);
+    c.stroke();
+    c.moveTo(20 + this.canvasWidth/4, this.canvasHeight - 30);
+    c.lineTo(20 + this.canvasWidth/4, this.canvasHeight - 20);
+    c.stroke();
+
+    c.fillText(this.mapWidth/4 + 'mm', 23, this.canvasHeight - 10);
 }
 
 ExpandedMap.prototype.drawPaths = function() {
