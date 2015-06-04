@@ -212,6 +212,7 @@ ExpandedMap.prototype.drawSupports = function() {
     c.moveTo(20, this.canvasHeight - 25);
     c.lineTo(20 + this.canvasWidth/4, this.canvasHeight - 25);
     c.stroke();
+    c.fillText(this.mapWidth/4 + 'mm', 23, this.canvasHeight - 10);
 
     c.moveTo(20, this.canvasHeight - 30);
     c.lineTo(20, this.canvasHeight - 20);
@@ -220,7 +221,17 @@ ExpandedMap.prototype.drawSupports = function() {
     c.lineTo(20 + this.canvasWidth/4, this.canvasHeight - 20);
     c.stroke();
 
-    c.fillText(this.mapWidth/4 + 'mm', 23, this.canvasHeight - 10);
+    for (var i=0; i<=4; i++) {
+        c.moveTo(i*0.25*this.canvasWidth, this.canvasHeight/2 - 5);
+        c.lineTo(i*0.25*this.canvasWidth, this.canvasHeight/2 + 5);
+        c.stroke();
+    }
+    for (var i=0; i<=4; i++) {
+        c.moveTo(this.canvasWidth/2 - 5, i*0.25*this.canvasHeight);
+        c.lineTo(this.canvasWidth/2 + 5, i*0.25*this.canvasHeight);
+        c.stroke();
+    }
+
 }
 
 ExpandedMap.prototype.drawPaths = function() {
