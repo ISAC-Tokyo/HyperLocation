@@ -194,41 +194,53 @@ ExpandedMap.prototype.update = function() {
 }
 
 ExpandedMap.prototype.drawSupports = function() {
-    var c = this.canvasContext;
+    var c = this.canvasContext,
+        h = this.canvasHeight,
+        w = this.canvasWidth;
     c.lineCap = 'round';
     c.lineJoin = 'round';
-    c.strokeStyle = 'rgba(120, 120, 120, 1)';
 
+    c.strokeStyle = 'rgba(180, 180, 180, 1)';
     c.beginPath();
     c.lineWidth = 1;
-    c.moveTo(this.canvasWidth/2, 0);
-    c.lineTo(this.canvasWidth/2, this.canvasHeight);
+    c.moveTo(w/2, h/2);
+    c.lineTo(w*2.8/5, h*3.5/5);
+    c.stroke();
+    c.font = '10px sans-serif';
+    c.fillText(this.centerLat+','+this.centerLon, w*2.7/5, h*3.7/5);
+
+    c.strokeStyle = 'rgba(120, 120, 120, 1)';
+    c.beginPath();
+    c.lineWidth = 1;
+    c.moveTo(w/2, 0);
+    c.lineTo(w/2, h);
     c.stroke();
 
-    c.moveTo(0, this.canvasHeight/2);
-    c.lineTo(this.canvasWidth, this.canvasHeight/2);
+    c.moveTo(0, h/2);
+    c.lineTo(w, h/2);
     c.stroke();
 
-    c.moveTo(20, this.canvasHeight - 25);
-    c.lineTo(20 + this.canvasWidth/4, this.canvasHeight - 25);
+    c.moveTo(20, h-25);
+    c.lineTo(20+w/4, h-25);
     c.stroke();
-    c.fillText(this.mapWidth/4 + 'mm', 23, this.canvasHeight - 10);
+    c.font = '12px sans-serif';
+    c.fillText(this.mapWidth/4 + 'mm', 23, h - 10);
 
-    c.moveTo(20, this.canvasHeight - 30);
-    c.lineTo(20, this.canvasHeight - 20);
+    c.moveTo(20, h-30);
+    c.lineTo(20, h-20);
     c.stroke();
-    c.moveTo(20 + this.canvasWidth/4, this.canvasHeight - 30);
-    c.lineTo(20 + this.canvasWidth/4, this.canvasHeight - 20);
+    c.moveTo(20+w/4, h-30);
+    c.lineTo(20+w/4, h-20);
     c.stroke();
 
     for (var i=0; i<=4; i++) {
-        c.moveTo(i*0.25*this.canvasWidth, this.canvasHeight/2 - 5);
-        c.lineTo(i*0.25*this.canvasWidth, this.canvasHeight/2 + 5);
+        c.moveTo(i*0.25*w, h/2 - 5);
+        c.lineTo(i*0.25*w, h/2 + 5);
         c.stroke();
     }
     for (var i=0; i<=4; i++) {
-        c.moveTo(this.canvasWidth/2 - 5, i*0.25*this.canvasHeight);
-        c.lineTo(this.canvasWidth/2 + 5, i*0.25*this.canvasHeight);
+        c.moveTo(w/2 - 5, i*0.25*h);
+        c.lineTo(w/2 + 5, i*0.25*h);
         c.stroke();
     }
 
